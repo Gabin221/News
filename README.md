@@ -26,7 +26,7 @@ Pour cloner et exécuter cette application, assurez-vous d'avoir [Android Studio
 
 1. Clonez ce dépôt :
     ```sh
-    git clone https://github.com/votre-utilisateur/News.git
+    git clone https://github.com/Gabin221/News.git
     ```
 2. Ouvrez le projet dans Android Studio.
 3. Synchronisez les dépendances et exécutez l'application sur un émulateur ou un appareil physique.
