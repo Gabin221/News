@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.firebase:firebase-ml-natural-language:22.0.0")
+    implementation("com.google.firebase:firebase-ml-natural-language-translate-model:20.0.7")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
