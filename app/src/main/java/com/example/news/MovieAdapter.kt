@@ -5,30 +5,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.example.news.databinding.ItemMovieBinding
-import kotlinx.coroutines.*
 
-class MovieAdapter(private val movies: List<Movie>, private val apiKey: String) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie, apiKey: String) {
-            binding.title.text = "${movie.title} (${movie.days_until} days)"
+        fun bind(movie: Movie) {
+            binding.title.text = movie.title
+            binding.decompte.text = "${movie.days_until} jours restants"
             Picasso.get().load(movie.poster_url).into(binding.poster)
-            binding.releaseDate.text = movie.release_date
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val translatedOverview = translateText(movie.overview, "fr", apiKey)
-                withContext(Dispatchers.Main) {
-                    binding.overview.text = translatedOverview
-                }
-            }
+            binding.overview.text = movie.overview
+            binding.releaseDate.text = date(movie.release_date)
         }
 
-        suspend fun translateText(text: String, targetLanguage: String, apiKey: String): String {
-            val response = translateApiService.translate(text, targetLanguage, apiKey)
-            return response.data.translations.firstOrNull()?.translatedText ?: text
+        private fun date(releaseDate: String): String {
+            val liste = releaseDate.split("-")
+            return liste[2] + "-" + liste[1] + "-" + liste[0]
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,7 +29,7 @@ class MovieAdapter(private val movies: List<Movie>, private val apiKey: String) 
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position], apiKey)
+        holder.bind(movies[position])
     }
 
     override fun getItemCount() = movies.size
