@@ -8,7 +8,7 @@ Bienvenue dans l'application **News**, une application Kotlin qui vous permet de
 Cette section utilise l'API "News Data" pour vous fournir les dernières actualités de diverses sources d'information. Vous pouvez consulter les articles récents sur différents sujets, vous permettant ainsi de rester à jour avec les événements mondiaux.
 
 ### 2. Actualités du MCU
-Pour les fans de l'univers cinématographique Marvel (MCU), cette section est dédiée aux dernières nouvelles concernant les prochains films et projets. Restez informé des nouvelles sorties, annonces et rumeurs sur vos super-héros préférés et leurs aventures.
+Pour les fans de l'univers cinématographique Marvel (MCU), cette section est dédiée aux dernières nouvelles concernant les prochains films et projets. Restez informé des nouvelles sorties et annonces des films du MCU.
 
 ### 3. Recherche d'Articles Scientifiques
 Cette section exploite l'API arXiv pour vous permettre de rechercher et lire des articles scientifiques. Que vous soyez étudiant, chercheur ou simplement curieux, vous pouvez accéder à une vaste base de données d'articles scientifiques couvrant un large éventail de domaines académiques.
