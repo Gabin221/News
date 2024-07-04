@@ -40,6 +40,11 @@
         android:textColor="@color/black"
         android:layout_marginTop="8dp" />
 
+    <io.husaynhakeem.tradur.TradurTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:translate_field="@+id/overview" />
+
     <TextView
         android:id="@+id/release_date"
         android:layout_width="wrap_content"
