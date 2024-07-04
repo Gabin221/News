@@ -54,7 +54,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.google.firebase:firebase-ml-natural-language:22.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

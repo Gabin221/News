@@ -6,16 +6,16 @@
     app:startDestination="@+id/navigation_mcu">
 
     <fragment
-        android:id="@+id/navigation_newsdata"
-        android:name="com.example.news.ui.newsdata.NewsDataFragment"
-        android:label="@string/title_newsdata"
-        tools:layout="@layout/fragment_newsdata" />
-
-    <fragment
         android:id="@+id/navigation_mcu"
         android:name="com.example.news.ui.mcu.McuFragment"
         android:label="@string/title_mcu"
         tools:layout="@layout/fragment_mcu" />
+
+    <fragment
+        android:id="@+id/navigation_newsdata"
+        android:name="com.example.news.ui.newsdata.NewsDataFragment"
+        android:label="@string/title_newsdata"
+        tools:layout="@layout/fragment_newsdata" />
 
     <fragment
         android:id="@+id/navigation_arxiv"

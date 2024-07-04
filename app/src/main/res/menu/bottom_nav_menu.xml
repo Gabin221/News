@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_newsdata"
-        android:icon="@drawable/ic_newsdata_black_24dp"
-        android:title="@string/title_newsdata" />
-
-    <item
         android:id="@+id/navigation_mcu"
         android:icon="@drawable/ic_mcu_black_24dp"
         android:title="@string/title_mcu" />
+
+    <item
+        android:id="@+id/navigation_newsdata"
+        android:icon="@drawable/ic_newsdata_black_24dp"
+        android:title="@string/title_newsdata" />
 
     <item
         android:id="@+id/navigation_arxiv"
