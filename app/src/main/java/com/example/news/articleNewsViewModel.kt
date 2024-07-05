@@ -7,5 +7,5 @@ data class ArticleNews(
     val poster: String,
     val description: String,
     val date: String,
-    val auteur: String
+    val auteurs: String
 )

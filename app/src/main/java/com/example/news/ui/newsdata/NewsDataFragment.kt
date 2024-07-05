@@ -1,25 +1,27 @@
 package com.example.news.ui.newsdata
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.news.databinding.FragmentNewsdataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.news.ArticleNews
 import com.example.news.ArticlesNewsAdapter
-import com.example.news.R
+import com.example.news.databinding.FragmentNewsdataBinding
+import com.example.news.NewsRetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsDataFragment : Fragment() {
 
     private var _binding: FragmentNewsdataBinding? = null
-
     private val binding get() = _binding!!
-
-    private lateinit var recyclerView: RecyclerView
     private val articlesNews = mutableListOf<ArticleNews>()
+    private lateinit var adapter: ArticlesNewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,11 +31,54 @@ class NewsDataFragment : Fragment() {
         _binding = FragmentNewsdataBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        recyclerView = root.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = ArticlesNewsAdapter(articlesNews)
+        setupRecyclerView()
+        fetchNews()
 
         return root
+    }
+
+    private fun setupRecyclerView() {
+        adapter = ArticlesNewsAdapter(articlesNews)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun fetchNews() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = NewsRetrofitInstance.api.getLatestNews(
+                    apiKey = "YOUR_API_KEY",
+                    query = "pizza",
+                    language = "fr"
+                )
+
+                if (response.status == "success") {
+                    val fetchedArticles = response.results.map {
+                        ArticleNews(
+                            title = it.title,
+                            link = it.link,
+                            category = it.category.joinToString(", "),
+                            poster = it.image_url,
+                            description = it.description,
+                            date = it.pubDate,
+                            auteurs = it.creator.joinToString(", ")
+                        )
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        articlesNews.addAll(fetchedArticles)
+                        adapter.notifyDataSetChanged()
+                        // Log the fetched articles
+                        Log.d("NewsDataFragment", "Fetched articles: $fetchedArticles")
+                    }
+                } else {
+                    Log.e("NewsDataFragment", "Failed to fetch news: ${response.status}")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("NewsDataFragment", "Error fetching news", e)
+            }
+        }
     }
 
     override fun onDestroyView() {

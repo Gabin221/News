@@ -16,7 +16,7 @@ class ArticlesNewsAdapter(private val articleNews: List<ArticleNews>) : Recycler
             Picasso.get().load(articleNews.poster).into(binding.poster)
             binding.description.text = articleNews.description
             binding.date.text = articleNews.date
-            binding.auteur.text = articleNews.auteur
+            binding.auteur.text = articleNews.auteurs
         }
     }
 
